@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local data — uploaded PDFs and the vector database
+data/uploads/*
+data/chroma/*
+!data/uploads/.gitkeep
+!data/chroma/.gitkeep
+
+# Dev harness scratch (the scripts clean these up themselves, but just in case)
+dev/chroma_*/
+dev/variant.pdf
+dev/*.log
+dev/uploads_test/

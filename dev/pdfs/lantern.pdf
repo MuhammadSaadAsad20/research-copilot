@@ -1,0 +1,292 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R] /Count 9 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 619 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(Abstract We introduce the Lantern architecture, a sequence model that) Tj
+T*
+(dispenses with recur-) Tj
+T*
+(rence entirely and relies instead on a gated retrieval mechanism. On three) Tj
+T*
+(benchmark trans-) Tj
+T*
+(lation tasks the model matches the accuracy of recurrent baselines while) Tj
+T*
+(training in less than a third of the wall-clock time. We attribute the speedup) Tj
+T*
+(to the absence of sequential dependencies along the time axis, which allows) Tj
+T*
+(every position to be computed in parallel.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            1) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 522 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(1 Introduction Recurrent networks process a sequence one position at a time,) Tj
+T*
+(carrying a hidden state forward. This sequential structure is the source of) Tj
+T*
+(both their strength and their central limitation: the computation for position) Tj
+T*
+(t cannot begin until position t-1 has finished. Memory constraints then limit) Tj
+T*
+(batching across examples, and long sequences become expensive to train.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            2) Tj
+T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 467 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(The Lantern model removes the recurrent connection altogether. Each position) Tj
+T*
+(attends over every other position through a learned similarity function, so) Tj
+T*
+(the path length between any two positions is constant rather than linear in) Tj
+T*
+(their distance. Constant path length is what makes long-range dependencies) Tj
+T*
+(learnable in practice.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            3) Tj
+T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 443 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(2 Architecture The encoder is a stack of six identical layers. Each layer has) Tj
+T*
+(two sub-) Tj
+T*
+(layers: a multi-head retrieval block and a position-wise feed-forward network.) Tj
+T*
+(We employ a residual connection around each sub-layer, followed by layer) Tj
+T*
+(normalisation. All sub-layers produce outputs of dimension 512.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            4) Tj
+T*
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 544 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(2.1 Gated retrieval A retrieval function maps a query and a set of key-value) Tj
+T*
+(pairs to an output. The output is a weighted sum of the values, where the) Tj
+T*
+(weight assigned to each value is computed by a compatibility function of the) Tj
+T*
+(query with the corresponding key. We scale the dot products by the inverse) Tj
+T*
+(square root of the key dimension, which keeps gradients well-conditioned as) Tj
+T*
+(dimension grows.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            5) Tj
+T*
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 483 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(2.2 Multiple heads Rather than performing a single retrieval with) Tj
+T*
+(full-dimensional keys, we project the queries, keys and values h times with) Tj
+T*
+(different learned projections. Multiple heads allow the model to attend to) Tj
+T*
+(information from different representation subspaces at different positions,) Tj
+T*
+(which a single averaged head would blur together.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            6) Tj
+T*
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 500 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(3 Training We trained on the standard corpus of 4.5 million sentence pairs.) Tj
+T*
+(Sentences were encoded with a shared vocabulary of 37000 tokens. Each training) Tj
+T*
+(batch contained approxi-) Tj
+T*
+(mately 25000 source tokens and 25000 target tokens. We used the Adam optimiser) Tj
+T*
+(with a learning rate that increases linearly for the first 4000 steps and) Tj
+T*
+(decays thereafter.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            7) Tj
+T*
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 460 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(4 Results On the English-to-German task the Lantern model reaches 28.4 BLEU,) Tj
+T*
+(improving over the best previously reported result by more than 2 BLEU. On) Tj
+T*
+(English-to-French it reaches 41.8 BLEU after training for 3.5 days on eight) Tj
+T*
+(GPUs, a small fraction of the training cost of the recurrent models it is) Tj
+T*
+(compared against.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            8) Tj
+T*
+ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 21 0 R >> >> /Contents 20 0 R >>
+endobj
+20 0 obj
+<< /Length 457 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(5 Conclusion We presented the Lantern architecture, the first sequence model) Tj
+T*
+(based entirely on gated retrieval. The model trains substantially faster than) Tj
+T*
+(architectures based on recurrent layers, and it sets a new state of the art on) Tj
+T*
+(two translation tasks. We are excited about applying it to inputs other than) Tj
+T*
+(text.) Tj
+T*
+() Tj
+T*
+(Lantern: Gated Retrieval for Sequences            9) Tj
+T*
+ET
+endstream
+endobj
+21 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000168 00000 n 
+0000000295 00000 n 
+0000000965 00000 n 
+0000001092 00000 n 
+0000001665 00000 n 
+0000001792 00000 n 
+0000002310 00000 n 
+0000002438 00000 n 
+0000002933 00000 n 
+0000003062 00000 n 
+0000003658 00000 n 
+0000003787 00000 n 
+0000004322 00000 n 
+0000004451 00000 n 
+0000005003 00000 n 
+0000005132 00000 n 
+0000005644 00000 n 
+0000005773 00000 n 
+0000006282 00000 n 
+trailer
+<< /Size 22 /Root 1 0 R >>
+startxref
+6355
+%%EOF

@@ -1,0 +1,102 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 398 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(Abstract We describe Beacon, a bidirectional encoder pretrained with a masked) Tj
+T*
+(token objective. Unlike left-to-right language models, Beacon conditions on) Tj
+T*
+(context from both directions at every layer, which produces representations) Tj
+T*
+(that transfer well to sentence level tasks.) Tj
+T*
+() Tj
+T*
+(Beacon: Bidirectional Encoders            1) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 441 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(1 Pretraining objective We mask fifteen percent of the input tokens at random) Tj
+T*
+(and train the model to recover them. Because the masked token is never) Tj
+T*
+(revealed to the encoder, the model must rely on surrounding context alone. A) Tj
+T*
+(second objective predicts whether two segments were adjacent in the source) Tj
+T*
+(corpus.) Tj
+T*
+() Tj
+T*
+(Beacon: Bidirectional Encoders            2) Tj
+T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 9 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 336 >>
+stream
+BT
+/F1 11 Tf
+14 TL
+72 720 Td
+(2 Fine-tuning For each downstream task we add a single output layer and fine-) Tj
+T*
+(tune every parameter end to end. Fine-tuning is inexpensive relative to) Tj
+T*
+(pretraining: most tasks converge within three epochs on a single GPU.) Tj
+T*
+() Tj
+T*
+(Beacon: Bidirectional Encoders            3) Tj
+T*
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000253 00000 n 
+0000000702 00000 n 
+0000000828 00000 n 
+0000001320 00000 n 
+0000001446 00000 n 
+0000001833 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+1905
+%%EOF

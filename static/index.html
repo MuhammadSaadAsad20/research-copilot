@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <h1 class="masthead-title">Research copilot</h1>
+  <p class="masthead-counts" id="counts" aria-live="polite"></p>
+</header>
+
+<p class="banner" id="banner" hidden></p>
+
+<main class="workspace">
+
+  <!-- Library ------------------------------------------------------------ -->
+  <aside class="library" aria-labelledby="library-heading">
+    <h2 class="section-heading" id="library-heading">Library</h2>
+
+    <div class="file-field">
+      <input type="file" id="file-input" accept="application/pdf,.pdf">
+      <label class="file-label" for="file-input" id="file-label">Add a PDF</label>
+    </div>
+
+    <p class="upload-note" id="upload-note" role="status" aria-live="polite" hidden></p>
+
+    <ul class="doc-list" id="doc-list"></ul>
+    <p class="empty" id="library-empty">No papers yet. Add a PDF and the copilot will read it.</p>
+  </aside>
+
+  <!-- Answer ------------------------------------------------------------- -->
+  <section class="reading" aria-labelledby="ask-heading">
+    <h2 class="visually-hidden" id="ask-heading">Ask a question</h2>
+
+    <form class="ask" id="ask-form">
+      <label class="visually-hidden" for="question">Your question</label>
+      <textarea id="question" class="ask-input" rows="2"
+                placeholder="Ask about your papers…"
+                autocomplete="off" spellcheck="false"></textarea>
+      <div class="ask-actions">
+        <button type="submit" class="button" id="ask-button">Ask</button>
+      </div>
+    </form>
+
+    <hr class="rule">
+
+    <div class="answer" id="answer" aria-live="polite">
+      <p class="empty">Ask a question and the answer will appear here, with a
+        numbered citation for every claim.</p>
+    </div>
+  </section>
+
+  <!-- Margin ------------------------------------------------------------- -->
+  <aside class="margin" aria-labelledby="margin-heading">
+    <h2 class="section-heading" id="margin-heading">Citations</h2>
+    <ol class="notes" id="notes"></ol>
+    <p class="empty" id="margin-empty">Citations appear here once you ask something.</p>
+  </aside>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+/* Research copilot
+   The visual language is a printed page with marginalia: cool laser-printed
+   paper, navy-shifted ink, and ballpoint blue for anything that marks or
+   references. One accent colour, no gradients, no card shadows. */
+
+:root {
+  --paper:    #F2F4F7;
+  --sheet:    #FFFFFF;
+  --ink:      #131A2A;
+  --ink-soft: #56607A;
+  --rule:     #D8DDE6;
+  --pen:      #2B4ACB;
+  --pen-wash: #E8ECFB;
+
+  --serif: "Newsreader", Georgia, serif;
+  --sans:  "IBM Plex Sans", system-ui, sans-serif;
+
+  --header-height: 56px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1, h2, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus is always visible, always the pen colour. */
+a:focus-visible,
+button:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+#file-input:focus-visible + .file-label {
+  outline: 2px solid var(--pen);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Masthead ----------------------------------------------------------- */
+
+.masthead {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 20px;
+  background: var(--sheet);
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.masthead-counts {
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.banner {
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--pen-wash);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+/* --- Three columns ------------------------------------------------------ */
+
+.workspace {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 300px;
+  align-items: start;
+  min-height: calc(100vh - var(--header-height));
+}
+
+.library,
+.margin {
+  padding: 20px 18px;
+}
+
+.library { border-right: 1px solid var(--rule); }
+.margin  { border-left:  1px solid var(--rule); }
+
+.reading {
+  padding: 20px 28px 64px;
+  background: var(--sheet);
+  min-height: calc(100vh - var(--header-height));
+}
+
+.section-heading {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+.empty {
+  font-size: 13px;
+  color: var(--ink-soft);
+  max-width: 40ch;
+}
+
+/* --- Library ------------------------------------------------------------ */
+
+.file-field { margin-bottom: 12px; }
+
+/* The input stays in the tab order; the label is what you see. */
+#file-input {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--sheet);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.file-label:hover { border-color: var(--pen); color: var(--pen); }
+
+.file-field.is-busy .file-label {
+  cursor: default;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+
+.upload-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+}
+
+.upload-note.is-problem { color: var(--ink); }
+
+.doc-list { margin-top: 4px; }
+
+.doc {
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.doc:first-child { border-top: 0; }
+
+.doc-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.doc-meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.doc-remove {
+  margin-top: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.doc-remove:hover { color: var(--pen); }
+
+/* --- Ask ---------------------------------------------------------------- */
+
+.ask { max-width: 62ch; }
+
+.ask-input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.ask-input::placeholder { color: var(--ink-soft); }
+.ask-input:focus { border-color: var(--pen); }
+
+.ask-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.button {
+  padding: 7px 16px;
+  border: 1px solid var(--pen);
+  border-radius: 3px;
+  background: var(--pen);
+  color: var(--sheet);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button:hover { background: #233EAE; border-color: #233EAE; }
+
+.button:disabled {
+  background: var(--sheet);
+  border-color: var(--rule);
+  color: var(--ink-soft);
+  cursor: default;
+}
+
+.rule {
+  max-width: 62ch;
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* --- Answer ------------------------------------------------------------- */
+
+.answer { max-width: 62ch; }
+
+.answer p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.answer p:last-child { margin-bottom: 0; }
+
+.answer ul, .answer ol {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.65;
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.answer ul { list-style: disc; }
+.answer ol { list-style: decimal; }
+.answer li { margin-bottom: 4px; }
+
+.answer .empty,
+.answer .working,
+.answer .problem {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.answer .problem { color: var(--ink); max-width: 60ch; }
+
+/* The one bold move: citations are real superscript numerals in the serif
+   face, exactly as a footnote looks in a printed paper. */
+.cite {
+  font-family: var(--serif);
+  font-size: 0.62em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.cite a {
+  color: var(--pen);
+  text-decoration: none;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+.cite a:hover { text-decoration: underline; }
+
+.cite a.is-linked,
+.cite a.is-active {
+  background: var(--pen-wash);
+}
+
+/* --- Margin notes ------------------------------------------------------- */
+
+.note {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px 8px;
+  margin: 0 -8px;
+  border-top: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.note:first-child { border-top: 0; }
+
+.note.is-active { background: var(--pen-wash); }
+
+.note-number {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--pen);
+  vertical-align: super;
+}
+
+.note-source {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.note-meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.note-quote {
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+/* Below 1100px the margin moves under the answer. */
+@media (max-width: 1100px) {
+  .workspace { grid-template-columns: 240px minmax(0, 1fr); }
+
+  .reading { min-height: 0; }
+
+  .margin {
+    grid-column: 2;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+    background: var(--sheet);
+    padding: 20px 28px 40px;
+  }
+}
+
+/* Below 760px the library becomes a horizontal strip above the input. */
+@media (max-width: 760px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+
+  .library {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 18px;
+  }
+
+  .doc-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .doc {
+    flex: 0 1 auto;
+    max-width: 100%;
+    padding: 8px 10px;
+    border-top: 0;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--sheet);
+  }
+
+  .doc-title { font-size: 16px; }
+
+  .reading { padding: 18px 18px 48px; }
+  .margin  { grid-column: 1; padding: 18px 18px 40px; }
+}
+
+@media (max-width: 400px) {
+  .masthead { padding: 0 14px; }
+  .masthead-title { font-size: 21px; }
+  .reading, .margin, .library { padding-left: 14px; padding-right: 14px; }
+}
+
+/* Motion answers an action, and only when the reader wants it. */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
